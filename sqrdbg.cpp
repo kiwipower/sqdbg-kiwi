@@ -40,18 +40,10 @@ HSQREMOTEDBG sq_rdbg_init(HSQUIRRELVM v,unsigned short port,SQBool autoupdate)
 
 SQRESULT sq_rdbg_waitforconnections(HSQREMOTEDBG rdbg)
 {
-    FILE *f = fopen("../sqdbg/serialize_state.nut", "r+b");
-    fseek(f, 0, SEEK_END);
-    long length = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    char buf[length];
-    fread(buf, 1, length, f);
-    fclose(f);
-
-    SQRESULT i = sq_compilebuffer(rdbg->_v, buf, length, _SC("SERIALIZE_STATE"), SQTrue);
-
+    SQRESULT i = sq_compilebuffer(rdbg->_v, serialize_state_nut, sizeof(serialize_state_nut), _SC("SERIALIZE_STATE"), SQTrue);
     if(SQ_FAILED(i)) {
 		sq_throwerror(rdbg->_v,_SC("error compiling the serialization function"));
+        return SQ_ERROR;
 	}
 	sq_getstackobj(rdbg->_v,-1,&rdbg->_serializefunc);
 	sq_addref(rdbg->_v,&rdbg->_serializefunc);
