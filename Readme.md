@@ -37,4 +37,4 @@ To integrate with your application - you need to do the following :
   sq_rdbg_waitforconnections(dbg);
 ```
 
-The debugger will only trigger breakpoints if the path to the file in eclipse matches that in your applciation
+The debugger will only trigger breakpoints if the path to the file in eclipse matches that in your application.
