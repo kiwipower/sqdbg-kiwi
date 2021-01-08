@@ -22,8 +22,14 @@ struct XMLEscape{
 #define SQDBG_ERROR_HANDLER _SC("_sqdbg_error_handler_")
 
 XMLEscape g_escapes[]={
-	{_SC('<'),
-     _SC("&lt;")},{'>',_SC("&gt;")},{_SC('&'),_SC("&amp;")},{_SC('\''),_SC("&apos;")},{_SC('\"'),_SC("&quot;")},{_SC('\n'),_SC("&quot;n")},{_SC('\r'),_SC("&quot;r")},{NULL,NULL}
+	{_SC('<'), _SC("&lt;")},
+	{'>',_SC("&gt;")},
+	{_SC('&'),_SC("&amp;")},
+	{_SC('\''),_SC("&apos;")},
+	{_SC('\"'),_SC("&quot;")},
+	{_SC('\n'),_SC("&quot;n")},
+	{_SC('\r'),_SC("&quot;r")},
+	{NULL,NULL}
 };
 
 const SQChar *IntToString(SQInteger n)
@@ -651,6 +657,7 @@ const SQChar *SQDbgServer::escape_xml(const SQChar *s)
 			case _SC('\"'): escape = _SC("&quot;"); break;
 			case _SC('\n'): escape = _SC("\\n"); break;
 			case _SC('\r'): escape = _SC("\\r"); break;
+			case _SC('\x1B'): escape = _SC("\\x1B"); break;
 		}
 		if(escape) {
 			scstrcpy(dest,escape);

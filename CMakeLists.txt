@@ -14,3 +14,4 @@ link_directories(
 link_libraries(libsqstdlib.so libsquirrel.so)
 
 add_library(sqdbg serialize_state.inl sqrdbg.h sqrdbg.cpp sqdbgserver.h sqdbgserver.cpp)
+add_executable(sqdb serialize_state.inl sqrdbg.h sqrdbg.cpp sqdbgserver.h sqdbgserver.cpp sqdb.cpp)
